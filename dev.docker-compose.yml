@@ -1,0 +1,63 @@
+version: "3.7"
+
+services:
+
+  dev-app:
+    build: .
+    container_name: app.dev.api.dantran.fr
+    restart: unless-stopped
+    networks:
+      - dev-api
+    ports:
+      - 8000:8000
+    environment:
+      - ENV=development
+      - API_USER=apiuser
+      - API_PASS=apipassword
+      - API_SECRET_KEY=7d8c5c3f6e77bef378cb01d4265eddb5fc276c96f56d883db8cdd3b015b21f56
+      - MONGO_HOST=dev-db
+      - MONGO_INITDB_ROOT_USERNAME=dbuser
+      - MONGO_INITDB_ROOT_PASSWORD=dbpassword
+      - MONGO_DB=api
+      - MINIO_HOST=dev-object:9000
+      - MINIO_ROOT_USER=objuser
+      - MINIO_ROOT_PASSWORD=objpassword
+      - MINIO_SECURE=False
+    depends_on:
+      - dev-db
+      - dev-object
+
+  dev-db:
+    image: mongo:latest
+    container_name: db.dev.api.dantran.fr
+    restart: unless-stopped
+    networks:
+      - dev-api
+    expose:
+      - 27017
+    # volumes:
+    #   - ./tmp/api/db:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dbuser
+      - MONGO_INITDB_ROOT_PASSWORD=dbpassword
+  
+  dev-object:
+    image: minio/minio:latest
+    container_name: object.dev.api.dantran.fr
+    restart: unless-stopped
+    networks:
+      - dev-api
+    expose:
+      - 9000
+    ports:
+      - 9000:9000
+    # volumes:
+    #   - ./tmp/api/object:/data
+    command: server /data
+    environment:
+      - MINIO_ROOT_USER=objuser
+      - MINIO_ROOT_PASSWORD=objpassword
+
+networks:
+  dev-api:
+    name: dev.api.dantran.fr

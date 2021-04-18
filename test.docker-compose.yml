@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+
+  test-app:
+    build:
+      context: .
+      dockerfile: test.Dockerfile
+    container_name: app.test.api.dantran.fr
+    environment:
+      - ENV=testing
+      - API_USER=apiuser
+      - API_PASS=apipassword
+      - API_SECRET_KEY=7d8c5c3f6e77bef378cb01d4265eddb5fc276c96f56d883db8cdd3b015b21f56
+      - MONGO_HOST=test-db
+      - MONGO_INITDB_ROOT_USERNAME=dbuser
+      - MONGO_INITDB_ROOT_PASSWORD=dbpassword
+      - MONGO_DB=api
+      - MINIO_HOST=test-object:9000
+      - MINIO_ROOT_USER=objuser
+      - MINIO_ROOT_PASSWORD=objpassword
+      - MINIO_SECURE=False
+    depends_on:
+      - test-db
+      - test-object
+
+  test-db:
+    image: mongo:latest
+    container_name: db.test.api.dantran.fr
+    expose:
+      - 27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dbuser
+      - MONGO_INITDB_ROOT_PASSWORD=dbpassword
+    logging:
+      driver: none 
+
+  test-object:
+    image: minio/minio:latest
+    container_name: object.test.api.dantran.fr
+    expose:
+      - 9000
+    environment:
+      - MINIO_ROOT_USER=objuser
+      - MINIO_ROOT_PASSWORD=objpassword
+    command: server /data
+    logging:
+      driver: none 
