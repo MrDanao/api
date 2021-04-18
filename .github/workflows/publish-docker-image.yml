@@ -19,7 +19,7 @@ jobs:
         run: |
           DOCKER_IMAGE=mrdanao/dantranfr-api
           VERSION=${GITHUB_REF#refs/tags/}
-          TAGS="${DOCKER_IMAGE}:lastest,${DOCKER_IMAGE}:${VERSION}"
+          TAGS="${DOCKER_IMAGE}:latest,${DOCKER_IMAGE}:${VERSION}"
           echo ::set-output name=tags::${TAGS}
       -
         name: Set up Docker Buildx
