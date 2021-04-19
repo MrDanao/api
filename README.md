@@ -1,4 +1,4 @@
-# api.dantran.fr
+# [api.dantran.fr](https://api.dantran.fr/docs)
 
 Still a WIP.. future backend of https://dantran.fr (currently built with PHP)
 
