@@ -15,6 +15,7 @@ from data.object_store import engine as os_client
 
 app = FastAPI(
     title='api.dantran.fr',
+    version='1.0.0',
     exception_handlers=exception_handlers
 )
 
