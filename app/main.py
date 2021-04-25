@@ -2,6 +2,7 @@ import json
 from sys import exit
 
 from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 
 from api.api import (
     api_router,
@@ -52,5 +53,12 @@ async def startup_event():
         )
         os_client.set_bucket_policy(bucket, bucket_policy)
 
-            
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
+
 app.include_router(api_router, prefix='')
