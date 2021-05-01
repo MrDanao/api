@@ -25,6 +25,16 @@ class ForbiddenError(ApiError):
         super().__init__(403, message)
 
 
+class ForbiddenTokenClaimError(ForbiddenError):
+    def __init__(self, message: str):
+        super().__init__(message)
+
+
+class ForbiddenTokenExpirationError(ForbiddenError):
+    def __init__(self, message: str):
+        super().__init__(message)
+
+
 class NotFoundError(ApiError):
     def __init__(self, message: str):
         super().__init__(404, message)
