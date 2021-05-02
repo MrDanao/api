@@ -1,6 +1,6 @@
 # [api.dantran.fr](https://api.dantran.fr/docs)
 
-Still a WIP.. future backend of https://dantran.fr (currently built with PHP)
+Backend of https://dantran.fr
 
 Playing with the following stack:
 * Python (FastAPI)
@@ -9,6 +9,8 @@ Playing with the following stack:
 
 Provided endpoints:
 * `/music`
+
+See the frontend project: [MrDanao/website](https://github.com/MrDanao/website)
 
 ## Run locally
 
