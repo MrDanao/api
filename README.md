@@ -33,9 +33,9 @@ $ docker-compose -f dev.docker-compose.yml up -d --build
 ```
 
 Access to:
-* Swagger UI: `https://<localhost|host_ip>:8000/docs`
-* ReDoc UI: `https://<localhost|host_ip>:8000/redoc`
-* MinIO UI: `https://<localhost|host_ip>:9000/`
+* Swagger UI: `http://<localhost|host_ip>:8000/docs`
+* ReDoc UI: `http://<localhost|host_ip>:8000/redoc`
+* MinIO UI: `http://<localhost|host_ip>:9000/`
 
 See logs:
 
